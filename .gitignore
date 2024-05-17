@@ -1,0 +1,19 @@
+# Envs
+.idea/
+.env*
+settings.toml
+
+# Dependencies
+Pipfile.lock
+venv
+
+# Others
+*.db
+*.pyc
+.idea
+*.xlsx
+*.csv
+*.sql
+.vscode
+__pycache__
+instance/

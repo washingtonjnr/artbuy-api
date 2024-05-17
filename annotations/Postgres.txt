@@ -1,0 +1,69 @@
+Commands:
+  to open: [psql -U root | postgres | etc] or [psql]
+
+  - \l or \list:
+    Lists all available databases.
+
+  - \c <database_name> or \connect <database_name>:
+    Connects to the specified database.
+
+  - \dt or \d:
+    Lists all tables in the current database.
+
+  - \dt+ or \d+:
+    Lists tables in detail (show coclumns), including their size and description.
+
+  - \du or \du+:
+    Lists all users or roles in the database cluster.
+
+  - \dt <table_name>:
+    Describes the specified table, showing its columns, types, and constraints.
+
+  - \dn or \dn+:
+    Lists all schemas in the current database.
+
+  - \df or \df+:
+    Lists all functions in the current database.
+
+  - \di or \di+:
+    Lists all indexes in the current database.
+
+  - \dS or \dS+:
+    Lists all sequences in the current database.
+
+  - \dp:
+    Shows the access privileges of tables, views, and sequences.
+
+  - \timing:
+    Toggles timing of SQL command execution.
+
+  - \q or \quit:
+    Quits the PostgreSQL command-line interface.
+
+
+SQL commands:
+  - SELECT * FROM <table_name>:
+    Retrieves all rows from the specified table.
+
+  - INSERT INTO <table_name> VALUES (...):
+    Inserts a new row into the specified table.
+
+  - UPDATE <table_name> SET column1 = value1, column2 = value2 WHERE condition:
+    Modifies existing rows in the table that satisfy the specified condition.
+
+  - DELETE FROM <table_name> WHERE condition:
+    Deletes rows from the specified table that satisfy the specified condition.
+
+  - CREATE DATABASE <database_name>:
+    Creates a new database.
+
+  - CREATE TABLE <table_name> (column1 datatype1, column2 datatype2, ...):
+    Creates a new table with the specified columns and data types.
+
+  - CREATE USER <username> WITH PASSWORD 'password':
+    Creates a new user with the specified username and password.
+
+
+Connect Postgres in project:
+  - Install pg:
+    PG is the node client, it forms the bridge beetwen the code and the database

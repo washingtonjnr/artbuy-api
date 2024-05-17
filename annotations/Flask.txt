@@ -1,0 +1,7 @@
+Migrate:
+  - flask db init
+  - flask db migrate -m "{ ACTION COMMENT }" (like a git commit)
+  - flask db upgrade (like a git push)
+
+Run (dev):
+    - flask --app wsgi.py --debug run

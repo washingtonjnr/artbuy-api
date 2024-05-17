@@ -1,0 +1,11 @@
+[default]
+EXTENSIONS = [
+  'api.blueprints.v1',
+  'api.ext.envs',
+  'api.ext.jwt',
+  'api.ext.migrate',
+  'api.ext.database',
+]
+DATABASE_URL="postgresql://XX:XX@XX:XX/artbuy"
+JWT_SECRET_KEY="XXXX"
+SQLALCHEMY_TRACK_MODIFICATIONS=false

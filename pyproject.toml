@@ -1,0 +1,37 @@
+[tool.black]
+line-length = 88
+target-version = ['py37']
+include = '\.pyi?$'
+exclude = '''(
+    /(
+        \.eggs          # exclude a top-level directory named "eggs"
+      | \.git           # exclude a top-level directory named "git"
+      | \.hg            # exclude a top-level directory named "hg"
+      | \.mypy_cache    # exclude a top-level directory named "mypy_cache"
+      | \.tox           # exclude a top-level directory named "tox"
+      | \.venv          # exclude a top-level directory named "venv"
+      | _build          # exclude a top-level directory named "_build"
+      | buck-out        # exclude a top-level directory named "buck-out"
+      | build           # exclude a top-level directory named "build"
+      | dist            # exclude a top-level directory named "dist"
+      | venv            # exclude a top-level directory named "venv"
+    )/
+    | (                  # exclude files or directories
+        \.pyc$              # exclude a file named "*.pyc"
+      | \.pyo$              # exclude a file named "*.pyo"
+      | \.gitignore$        # exclude a file named ".gitignore"
+      | \.hgignore$         # exclude a file named ".hgignore"
+      | \.mypy_cache$       # exclude a file named ".mypy_cache"
+      | \.tox$              # exclude a file named ".tox"
+      | \.venv$             # exclude a file named ".venv"
+      | (                   # exclude directories
+          __pycache__         # exclude a directory named "__pycache__"
+        | _build              # exclude a directory named "_build"
+        | buck-out            # exclude a directory named "buck-out"
+        | build               # exclude a directory named "build"
+        | dist                # exclude a directory named "dist"
+        | venv                # exclude a directory named "venv"
+      )/
+    )
+  )'''
+  skip-string-normalization = true

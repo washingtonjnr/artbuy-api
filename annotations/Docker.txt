@@ -1,0 +1,10 @@
+Commands to run database:
+  - docker start pg (run postgres image)
+
+  - docker ps (check run)
+
+  - docker exec -it pg bash (inside container bash)
+
+  - docker exec -it pg psql -U root (inside container bash with psql)
+
+  - FOLLOW "POSTGRES.TXT" TO CREATE THE BANK (tables will be created using PRISMA)
