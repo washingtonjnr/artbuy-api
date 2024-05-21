@@ -21,27 +21,21 @@ class AddressModel(Model, SerializerMixin):
     #
     serialize_rules = ("-user",)
     #
-    id: uuid.uuid4 = db.Column(
-        db_uuid(), primary_key=True, default=lambda: str(uuid.uuid4())
+    id = db.Column(db.UUID, primary_key=True, default=uuid.uuid4)
+    #
+    cep = db.Column(db.String(10), nullable=False)
+    state = db.Column(db.String(50), nullable=False)
+    street = db.Column(db.String(60), nullable=False)
+    number = db.Column(db.String(10), nullable=False)
+    country = db.Column(db.String(50), nullable=False)
+    province = db.Column(db.String(50), nullable=False)
+    complement = db.Column(db.String(50), nullable=False)
+    neighborhood = db.Column(db.String(50), nullable=False)
+    # [RELASHIONSHIP]
+    user_id = db.Column(
+        db.UUID, db.ForeignKey("user.id", use_alter=True), nullable=False, unique=True
     )
-    # About
-    cep: str = db.Column(db.String(10), nullable=False)
-    state: str = db.Column(db.String(50), nullable=False)
-    street: str = db.Column(db.String(60), nullable=False)
-    number: str = db.Column(db.String(10), nullable=False)
-    country: str = db.Column(db.String(50), nullable=False)
-    province: str = db.Column(db.String(50), nullable=False)
-    complement: str = db.Column(db.String(50), nullable=False)
-    neighborhood: str = db.Column(db.String(50), nullable=False)
-    # Relationship
-    user_id: uuid.uuid4 = db.Column(db_uuid(), db.ForeignKey("user.id"), nullable=False)
-    user: Mapped["UserModel"] = db.relationship("UserModel")
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-
-        if not self.id:
-            self.id = uuid.uuid4()
+    user = db.relationship("UserModel")
 
     def json(self):
         return {

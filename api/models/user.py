@@ -8,13 +8,9 @@ from flask_jwt_extended.utils import get_jwt_identity
 # Ext
 from api.ext.database import db
 
-# Models
-from api.models.file import FileModel
-
 # Utils
-from api.utils.db_types import db_uuid
-from api.utils.exceptions import NotFound
 from api.utils.jwt import encode_jwt_token
+from api.utils.exceptions import NotFound
 
 
 Model = db.Model
@@ -31,8 +27,8 @@ class UserModelAttributes(Enum):
 class UserModel(Model, SerializerMixin):
     __tablename__ = "user"
     #
-    id: uuid.uuid4 = db.Column(
-        db_uuid(), primary_key=True, default=lambda: str(uuid.uuid4())
+    id = db.Column(
+        db.UUID, primary_key=True, default=uuid.uuid4, unique=True, nullable=False
     )
     cpf = db.Column(db.String(11), nullable=False)
     name = db.Column(db.String(150), nullable=False)
@@ -41,24 +37,44 @@ class UserModel(Model, SerializerMixin):
     email = db.Column(db.String(150), nullable=False, unique=True)
     is_enabled = db.Column(db.Boolean, default=True)
     is_private = db.Column(db.Boolean, default=False)
-    # relationship
-    address = db.relationship("AddressModel", uselist=False, back_populates="user")
-    # TODO: add avatar
-    # avatar_id: uuid.uuid4 = db.Column(
-    #     db_uuid(), db.ForeignKey("file.id"), nullable=True
-    # )
-    # avatar = db.relationship("FileModel")
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    # -- [EXT DATA]
+    # ADDRESS,
+    # ASSESSMENENTS,
+    # AUCTIONS,
+    # CASH,
+    # DEPOSITS,
+    # POSTS,
+    # SOCIAL,
+    # TRANSACTIONS
 
-        if not self.id:
-            self.id = uuid.uuid4()
+    # -- [RELASHIONSHIP]
+    # 1:1
+    avatar = db.relationship("FileModel", back_populates="user", uselist=False)
+    address = db.relationship("AddressModel", back_populates="user", uselist=False)
+    # 1:n
+    posts = db.relationship(
+        "PostModel",
+        foreign_keys="PostModel.user_id",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
+    buyer_posts = db.relationship(
+        "PostModel",
+        foreign_keys="PostModel.buyer_id",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
+    comments = db.relationship(
+        "CommentModel", back_populates="user", cascade="all, delete-orphan"
+    )
+    interactions = db.relationship(
+        "InteractionModel", back_populates="user", cascade="all, delete-orphan"
+    )
 
     # Using it in return
     def json(self):
         return {
-            "id": self.id,
             "name": self.name,
             "email": self.email,
             "phone": self.phone,

@@ -19,7 +19,7 @@ def encode_jwt_token(
         identity.update(identity_extra)
 
     if not expire_delta:
-        expire_delta = timedelta(hours=1)
+        expire_delta = timedelta(hours=8)
 
     if not refresh_expire_delta:
         refresh_expire_delta = timedelta(days=2)
